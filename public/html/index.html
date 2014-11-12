@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="description" content="">
+</head>
+<body>
+    <div id="todo">
+    </div>
+    <script type="text/template" id="item-template">
+        <div id="todo">
+            <input type="checkbox" />
+        </div>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+    <script src="../javascript/backbone.js"></script>
+    <script>
+        var TodoRouter = Backbone.Router.extend({
+            /* define the route and function maps for this router */
+            routes: {
+                "about" : "showAbout",
+                "search/:query" : "searchTodos",
+                "search/:query/p:page" : "searchTodos"
+            },
+
+            showAbout: function() {},
+
+            searchTodos: function(query, page) {
+                var page_number = page || 1;
+                console.log("Page number: " + page_number + " of the results for todos containing the word: " + query);
+            }
+        });
+
+        var myTodoRouter = new TodoRouter();
+
+        Backbone.History.start();
+
+        // Go to and check console:
+        // http://localhost/#search/job/p3 logs: Page number: 3 of the results for todos containing the word: job
+        // http://localhost/#search/job    logs: Page number: 1 of the results for todos containing the word: job
+        // etc.
+    </script>
+</body>
+</html>
